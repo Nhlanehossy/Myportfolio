@@ -9,18 +9,167 @@ background-color: goldenrod;
 height: 200px;
 color: white;
     }
+ 
+#bar{
+width:0%;
+background-color:goldenrod;
+height:30px;
+text-align:center;
+line-height:30px;
+color:white;
+}
+   
 </style>
+<script src="javasript.js">
+
+</script>
 </head>
 <body style="background-image:url(vitu.jpg) ">
     <header>
         <nav>
             <button><a href="index.html">HOME</a></button> 
             <button><a href="ABOUT.html">SKILLS</a></button> 
-            <button><a href="service.html">SERVICES</a></button> 
+            <button><a href="service.html">PROJECT</a></button> 
             <button><a href="contacts.html">CONTACTS</a></button> <br>
         </nav>
+        <ul id="search-results"><input type="text" id="search-input" placeholder="Search..." style="float: right;"></ul>
     </header>
     <main>
+      <div id="greeting"><button onclick="greeting()">MONI APONGO</button></div>
+        <script>
+            const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', function(event) {
+  const searchTerm = event.target.value.toLowerCase();
+  
+
+  searchResults.innerHTML = "";
+
+  if (searchTerm.trim() !== "") {
+
+    const results = performSearch(searchTerm);
+    displayResults(results);
+  }
+});
+
+function performSearch(searchTerm) {
+
+  const data = ["about, fruit, nhlane, fred"];
+  return data.filter(item => item.toLowerCase().includes(searchTerm));
+}
+
+function displayResults(results) {
+  if (results.length === 0) {
+    const noResultsItem = document.createElement('li');
+    noResultsItem.textContent = 'your request is too involving, i can not handle it';
+    searchResults.appendChild(noResultsItem);
+  } else {
+    results.forEach(result => {
+      const item = document.createElement('li');
+      item.textContent = result;
+      searchResults.appendChild(item);
+    });
+  }
+}
+
+        </script>
+    </script>
+ <h3> progress bar</h3>
+ <div id="progress" >
+ <div id="bar" ></div>
+ </div>
+ <br>
+ <button onclick="move()">PROGRESS CHECKER</button>
+ <p>Click button above to see my level of project completion</p>
+ <script type="text/javascript">
+ var i = 0;
+ function move(){
+   if(i == 0){
+   i = 1;
+   }
+   var j = document.getElementById("bar");
+   var width = 1;
+   var id = setInterval(frame,50)
+   function frame(){
+   if(width>=99){
+   clearInterval(id)
+   i = 0
+   }
+   
+   else{
+   width++
+   j.style.width = width + "%"
+   j.innerHTML = width + "%"
+   }
+   
+   }
+ }
+ </script>
+        <form id="contact-form">
+            <input type="email"name="email" placeholder="email" id="email"required><br>
+            <input type="text"id="name" placeholder="name" required><br>
+            <textarea id="message"></textarea><br>
+            <input type="submit"></button>
+        </form>
+       <div id ="form-status"></div>
+    
+        <script>
+            const form = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+            
+            form.addEventListener('submit', function(event) {
+              event.preventDefault(); 
+              const name = document.getElementById('name').value.trim();
+              const email = document.getElementById('email').value.trim();
+              const message = document.getElementById('message').value.trim();
+            
+              if (name === '' || email === '' || message === '') {
+                formStatus.textContent = 'Please fill in all fields.';
+                return;
+              }
+            
+              if (!validateEmail(email)) {
+                formStatus.textContent = 'Please enter a valid email address.';
+                return;
+              }
+            
+            
+              formStatus.textContent = 'Sending...';
+            
+              form.reset();
+              formStatus.textContent = 'Message sent!';
+            });
+            
+            function validateEmail(email) {
+              const re = /\S+@\S+\.\S+/;
+              return re.test(email);
+            }
+                  </script>
+
+
+
+         <script>        
+         function greeting(){
+const greetingElement = document.getElementById('greeting');
+const currentHour = new Date().getHours();
+
+let greeting;
+
+if (currentHour == 0 && currentHour <12) {
+  greeting = 'Good morning';
+} else if (currentHour >12 && currentHour<=16 ) {
+  greeting = 'Good afternoon';
+} else if(currentHour>16&&currentHour<=20){
+  greeting = 'Good evening';
+}else{
+  greeting="good night";
+}
+
+greetingElement.textContent = greeting;}
+</script>
+
+
         <p style="color: blue ;font-size: large;"> ,My name is Joseph Nhlane. <br> A student studying ICT at mzuzu university. <br>for more contacts details and Registration click on the photo bellow!!</p>
         <a href="contacts.html">
 <img src="marcel.jpg" alt="the pick is loading" width="350" height="450" ></a><br>
@@ -31,7 +180,7 @@ color: white;
         <div class="footer-body" >
             <div>CONTACTS DETAILS
 
-            </div>
+            </div><fieldset>
             <div>
                 <ul>
                     <li>      Whatsapp number 0882088837    </li>
@@ -47,6 +196,6 @@ Mobile number: 0992435815
             </div>
         </div>
 
-    </footer>
+   </fieldset> </footer>
 </body>
 </html>
